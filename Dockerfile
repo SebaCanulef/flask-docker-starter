@@ -1,22 +1,21 @@
-# Imagen base
+# Imagen base ligera de Python
 FROM python:3.12-slim
 
-# Directorio de trabajo
+# Establecer el directorio de trabajo
 WORKDIR /app
 
-# Copiar dependencias
-# Copiar dependencias
-COPY app/requirements.txt .
-
-
-# Instalar dependencias
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copiar todo el contenido del proyecto
+# Copiar todo el contenido del repositorio al contenedor
 COPY . .
 
-# Exponer el puerto Flask
+# Instalar dependencias si existe el archivo requirements.txt dentro de app/
+RUN if [ -f app/requirements.txt ]; then \
+        pip install --no-cache-dir -r app/requirements.txt; \
+    else \
+        echo "⚠️ No se encontró app/requirements.txt, continuando sin instalar dependencias"; \
+    fi
+
+# Exponer el puerto donde corre Flask
 EXPOSE 5000
 
-# Comando por defecto
+# Comando por defecto para ejecutar la aplicación Flask
 CMD ["python", "app/main.py"]
