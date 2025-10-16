@@ -1,11 +1,20 @@
+# Imagen base
 FROM python:3.12-slim
 
+# Establecer el directorio de trabajo
 WORKDIR /app
 
-COPY requirements.txt .
+# Copiar dependencias
+COPY app/requirements.txt /app/requirements.txt
+
+# Instalar dependencias
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app/ ./app
+# Copiar el resto del código
+COPY app /app
 
+# Exponer el puerto Flask
 EXPOSE 5000
-CMD ["python", "app/main.py"]
+
+# Comando de ejecución
+CMD ["python", "main.py"]
