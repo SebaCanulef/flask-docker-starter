@@ -17,5 +17,5 @@ RUN if [ -f app/requirements.txt ]; then \
 # Exponer el puerto donde corre Flask
 EXPOSE 5000
 
-# Comando por defecto para ejecutar la aplicación Flask
-CMD ["python", "app/main.py"]
+# Comando por defecto para ejecutar 
+CMD ["python", "app/app/main.py"]
