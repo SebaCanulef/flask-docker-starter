@@ -10,8 +10,8 @@ COPY app/requirements.txt .
 # Instalar dependencias
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiar el código fuente dentro de /app/app
-COPY app/ ./app
+# Copiar el código (carpeta app completa dentro del contenedor)
+COPY . .
 
 # Exponer el puerto Flask
 EXPOSE 5000
